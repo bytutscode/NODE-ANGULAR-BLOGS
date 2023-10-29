@@ -4,6 +4,7 @@ import { getUser } from './getUser';
 import { getUsers } from './getUsers';
 import { updateUser } from './updateUser';
 import { uploadProfilePhotos } from './uploadProfilePhotos';
+import { deleteUser } from './deleteUser';
 
 export {
     createUser,
@@ -11,5 +12,6 @@ export {
     getUsers,
     updateUser,
     deleteProfilePhoto,
-    uploadProfilePhotos
+    uploadProfilePhotos,
+    deleteUser
 }
