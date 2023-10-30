@@ -7,7 +7,7 @@ export const getCategory = async (req: Request, res: Response) => {
         return res.status(200).json(categories)
     } catch (error) {
         return res.status(500).json({
-            message: 'Internal error, contact support!'
+            message: 'There was an internal error while processing your request'
         })
     }
 }

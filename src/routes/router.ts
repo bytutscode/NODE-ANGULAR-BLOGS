@@ -7,6 +7,8 @@ import { fileValidator, upload } from "../middlewares/multer";
 import { login } from "../controllers/login";
 import { authentication } from "../middlewares/Auth";
 import { createCategory } from "../controllers/category/createCategory";
+import { updateCategory } from "../controllers/category/updateCategory";
+import { deleteCategory } from "../controllers/category/deleteCategory";
 
 const router = Router();
 
@@ -24,5 +26,7 @@ router.delete('/user/:id', deleteUser);
 
 router.get('/category', getCategory)
 router.post('/category', validator(createCategorySchema), createCategory)
+router.put('/category/:id', validator(createCategorySchema), updateCategory)
+router.delete('/category/:id', deleteCategory)
 
 export default router;
