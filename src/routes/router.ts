@@ -1,14 +1,12 @@
 import { Router } from "express";
 import validator from "../middlewares/validation/validator";
-import { getCategory } from "../controllers/category/getCategories";
 import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser } from '../controllers/user/index';
+import { createCategory, getCategory, updateCategory, deleteCategory } from "../controllers/category/index";
 import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema } from "../middlewares/validation/index";
 import { fileValidator, upload } from "../middlewares/multer";
 import { login } from "../controllers/login";
 import { authentication } from "../middlewares/Auth";
-import { createCategory } from "../controllers/category/createCategory";
-import { updateCategory } from "../controllers/category/updateCategory";
-import { deleteCategory } from "../controllers/category/deleteCategory";
+
 
 const router = Router();
 
