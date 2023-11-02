@@ -1,7 +1,7 @@
-import { createUserSchema } from "./createUserSchema";
+import { createUserSchema } from "./user/createUserSchema";
 import { loginSchema } from "./loginSchema";
-import { updateUserSchema } from "./updateUserSchema";
-import { createCategorySchema } from "./createCategorySchema";
+import { updateUserSchema } from "./user/updateUserSchema";
+import { createCategorySchema } from "./category/createCategorySchema";
 
 export {
     createUserSchema,

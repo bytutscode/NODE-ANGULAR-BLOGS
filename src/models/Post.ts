@@ -18,7 +18,7 @@ export const Post = sequelize.define<Post>('Post', {
     image: { type: DataTypes.STRING, allowNull: false },
     title: { type: DataTypes.STRING, allowNull: false },
     content: { type: DataTypes.STRING, allowNull: false },
-    date: { type: DataTypes.DATE }
+    date: { type: DataTypes.DATE, defaultValue: Date.now() }
 },
     {
         tableName: 'posts',
