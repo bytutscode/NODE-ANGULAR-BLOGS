@@ -9,13 +9,17 @@ import { authentication } from "../middlewares/Auth";
 import { createPost } from "../controllers/post/createPost";
 import { createPostSchema } from "../middlewares/validation/post/createPostSchema";
 import { getPosts } from "../controllers/post/getPosts";
+import { getPost } from "../controllers/post/getPost";
+import { deletePost } from "../controllers/post/deletePost";
+import { createAdmSchema } from "../middlewares/validation/adm/createAdmSchema";
+import { createAdm } from "../controllers/adm/createADM";
 
 
 const router = Router();
 
 router.post('/user', validator(createUserSchema), createUser);
 router.post('/login', validator(loginSchema), login);
-router.get('/post', getPosts);
+
 router.use(authentication);
 
 router.get('/user', getUsers);
@@ -30,7 +34,11 @@ router.post('/category', validator(createCategorySchema), createCategory);
 router.put('/category/:id', validator(createCategorySchema), updateCategory);
 router.delete('/category/:id', deleteCategory);
 
-
+router.get('/post', getPosts);
+router.get('/post/:id', getPost);
 router.post('/post', upload.single('image'), validator(createPostSchema), fileValidator, createPost);
+router.delete('/post/:id', deletePost);
+
+router.post('/adm', validator(createAdmSchema), createAdm);
 
 export default router;

@@ -5,7 +5,7 @@ export interface Adm extends Model {
     id: number,
     name: string,
     email: string,
-    passowrd: string,
+    password: string,
 }
 
 export const Adm = sequelize.define<Adm>('Adm', {
