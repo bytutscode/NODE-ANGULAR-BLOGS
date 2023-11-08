@@ -7,7 +7,7 @@ export interface View extends Model {
 }
 
 export const View = sequelize.define<View>('View', {
-    user_ip: { type: DataTypes.STRING, allowNull: false },
+    user_ip: { type: DataTypes.STRING, allowNull: false, primaryKey: true },
     post_id: { type: DataTypes.INTEGER, allowNull: false }
 },
     {

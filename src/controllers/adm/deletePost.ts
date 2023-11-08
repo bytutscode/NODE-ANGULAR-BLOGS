@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import Post from "../../models/Post";
-import View from "../../models/View";
 
-export const getPost = async (req: Request, res: Response) => {
+export const deletePostAdm = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     if (isNaN(+id)) {
@@ -12,19 +11,15 @@ export const getPost = async (req: Request, res: Response) => {
     }
 
     try {
-        const post = await Post.findByPk(id);
+        const post = await Post.findOne({ where: { id } });
         if (!post) {
             return res.status(404).json({
-                message: 'Post not found'
+                message: 'post not found'
             })
         }
 
-        const checkView = await View.findOne({ where: { user_ip: req.ip, post_id: id } });
-        if (!checkView) {
-            await View.create({ user_ip: req.ip, post_id: id });
-        }
-
-        return res.status(200).json(post);
+        await post.destroy();
+        return res.status(204).send();
     } catch (error) {
         return res.status(500).json({
             message: 'There was an internal error while processing your request'

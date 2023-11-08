@@ -22,6 +22,8 @@ export const createAdm = async (req: Request, res: Response): Promise<Response> 
         const { password: _, ...newAdmInfo } = newAdm.toJSON();
         return res.status(201).json(newAdmInfo)
     } catch (error) {
-        return res.status(500).json({ message: 'There was an internal error, please contact the support' })
+        return res.status(500).json({
+            message: 'There was an internal error while processing your request'
+        })
     }
 }

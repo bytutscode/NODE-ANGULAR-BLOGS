@@ -5,7 +5,7 @@ import { createCategory, getCategory, updateCategory, deleteCategory } from "../
 import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema } from "../middlewares/validation/index";
 import { fileValidator, upload } from "../middlewares/multer";
 import { login } from "../controllers/login";
-import { authentication } from "../middlewares/Auth";
+import { authentication, authenticationADM } from "../middlewares/Auth";
 import { createPost } from "../controllers/post/createPost";
 import { createPostSchema } from "../middlewares/validation/post/createPostSchema";
 import { getPosts } from "../controllers/post/getPosts";
@@ -21,7 +21,6 @@ router.post('/user', validator(createUserSchema), createUser);
 router.post('/login', validator(loginSchema), login);
 
 router.use(authentication);
-
 router.get('/user', getUsers);
 router.get('/user/:id', getUser);
 router.put('/user', validator(updateUserSchema), updateUser);
@@ -39,6 +38,7 @@ router.get('/post/:id', getPost);
 router.post('/post', upload.single('image'), validator(createPostSchema), fileValidator, createPost);
 router.delete('/post/:id', deletePost);
 
+router.use(authenticationADM);
 router.post('/adm', validator(createAdmSchema), createAdm);
 
 export default router;
