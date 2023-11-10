@@ -8,7 +8,8 @@ export interface Post extends Model {
     image: string,
     title: string,
     content: string,
-    date: Date
+    date: Date,
+    status: boolean
 }
 
 export const Post = sequelize.define<Post>('Post', {
@@ -18,7 +19,8 @@ export const Post = sequelize.define<Post>('Post', {
     image: { type: DataTypes.STRING, allowNull: false },
     title: { type: DataTypes.STRING, allowNull: false },
     content: { type: DataTypes.STRING, allowNull: false },
-    date: { type: DataTypes.DATE, defaultValue: Date.now() }
+    date: { type: DataTypes.DATE, defaultValue: Date.now() },
+    status: { type: DataTypes.BOOLEAN, defaultValue: false }
 },
     {
         tableName: 'posts',

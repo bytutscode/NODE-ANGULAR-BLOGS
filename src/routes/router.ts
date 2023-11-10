@@ -13,6 +13,7 @@ import { getPost } from "../controllers/post/getPost";
 import { deletePost } from "../controllers/post/deletePost";
 import { createAdmSchema } from "../middlewares/validation/adm/createAdmSchema";
 import { createAdm } from "../controllers/adm/createADM";
+import { deletePostAdm } from "../controllers/adm/deletePost";
 
 
 const router = Router();
@@ -40,5 +41,7 @@ router.delete('/post/:id', deletePost);
 
 router.use(authenticationADM);
 router.post('/adm', validator(createAdmSchema), createAdm);
+router.post('/adm/post/:id');
+router.delete('/adm/post/:id', deletePostAdm);
 
 export default router;
