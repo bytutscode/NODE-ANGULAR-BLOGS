@@ -1,20 +1,13 @@
 import { Router } from "express";
 import validator from "../middlewares/validation/validator";
-import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser } from '../controllers/user/index';
-import { createCategory, getCategory, updateCategory, deleteCategory } from "../controllers/category/index";
-import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema } from "../middlewares/validation/index";
+import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser } from '../controllers/user';
+import { createCategory, getCategory, updateCategory, deleteCategory } from "../controllers/category";
+import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema, createAdmSchema, createPostSchema } from "../middlewares/validation";
+import { createPost, getPosts, getPost, deletePost } from '../controllers/post';
+import { createAdm, deletePostAdm, getPostToApprove, managePost } from "../controllers/adm";
 import { fileValidator, upload } from "../middlewares/multer";
 import { login } from "../controllers/login";
 import { authentication, authenticationADM } from "../middlewares/Auth";
-import { createPost } from "../controllers/post/createPost";
-import { createPostSchema } from "../middlewares/validation/post/createPostSchema";
-import { getPosts } from "../controllers/post/getPosts";
-import { getPost } from "../controllers/post/getPost";
-import { deletePost } from "../controllers/post/deletePost";
-import { createAdmSchema } from "../middlewares/validation/adm/createAdmSchema";
-import { createAdm } from "../controllers/adm/createADM";
-import { deletePostAdm } from "../controllers/adm/deletePost";
-
 
 const router = Router();
 
@@ -41,7 +34,8 @@ router.delete('/post/:id', deletePost);
 
 router.use(authenticationADM);
 router.post('/adm', validator(createAdmSchema), createAdm);
-router.post('/adm/post/:id');
+router.get('/adm/post', getPostToApprove);
+router.post('/adm/post/:id', managePost);
 router.delete('/adm/post/:id', deletePostAdm);
 
 export default router;

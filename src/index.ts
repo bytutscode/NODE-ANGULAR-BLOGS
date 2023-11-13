@@ -9,7 +9,9 @@ app.use(Express.json());
 app.use(Express.static(__dirname + '../public'));
 app.use(router);
 
-const port = process.env.PORT
-app.listen(port, () => {
-    console.log(`App is running on ${process.env.BASE_URL}:${port}`)
-})
+// const port = process.env.PORT
+// app.listen(port, () => {
+//     console.log(`App is running on ${process.env.BASE_URL}:${port}`)
+// })
+
+export = app;
