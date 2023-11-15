@@ -1,7 +1,6 @@
 import request from 'supertest';
 import app from '../../index';
 import User from '../../models/User';
-import Adm from '../../models/Adm';
 
 describe('testing user controllers', () => {
     const testUserCorrect = {
@@ -15,7 +14,6 @@ describe('testing user controllers', () => {
         password: 'invalidPass'
     }
 
-    let user: User;
     let token: string;
 
     beforeAll(async () => {
@@ -61,12 +59,42 @@ describe('testing user controllers', () => {
         }
     });
 
-    it('Should try login with a nonexistent account and give an unauthorized error', async () => {
-        const res = await request(app).post('/login').send({
-            email: testUserWrong.email,
-            password: testUserWrong.password
-        });
-        expect(res.status).toBe(403);
-    })
+    it('Should get an user by id', async () => {
+        const res = await request(app).get('/user/1').set('Authorization', 'Bearer ' + token);
+        expect(res.body).toHaveProperty('id', 1);
+        expect(res.body).toHaveProperty('name', testUserCorrect.name);
+        expect(res.body).toHaveProperty('email', testUserCorrect.email);
+    });
+
+    it('Should update just a logged user name', async () => {
+        const res = await request(app).put('/user').
+            set('Authorization', 'Bearer ' + token).
+            send({ name: 'newName' });
+
+        expect(res.status).toBe(204);
+
+        const res2 = await request(app).get('/user/1').set('Authorization', 'Bearer ' + token);
+        expect(res2.body).toHaveProperty('name', 'newName');
+    });
+
+    it('Should update logged user name,email and password', async () => {
+        const res = await request(app).put('/user').
+            set('Authorization', 'Bearer ' + token).
+            send({ name: 'sam', email: 'sam2@gmail.com', password: '12345678' });
+
+        expect(res.status).toBe(204);
+
+        const res2 = await request(app).get('/user/1').set('Authorization', 'Bearer ' + token);
+        expect(res2.body).toHaveProperty('name', 'sam');
+        expect(res2.body).toHaveProperty('email', 'sam2@gmail.com');
+    });
+
+    it('Should delete logged user account', async () => {
+        const res = await request(app).delete('/user').set('Authorization', 'Bearer ' + token);
+        expect(res.status).toBe(204);
+
+        const res2 = await request(app).get('/user/1').set('Authorization', 'Bearer ' + token);
+        expect(res2.status).toBe(404);
+    });
 
 })

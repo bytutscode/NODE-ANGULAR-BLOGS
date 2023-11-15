@@ -13,7 +13,7 @@ describe('login testing', () => {
 
     const testUserWrong = {
         email: 'sam@gmail.com',
-        password: 'invalid'
+        password: 'invalidpass'
     }
 
     beforeAll(async () => {
@@ -40,6 +40,14 @@ describe('login testing', () => {
         expect(res.body.user).toHaveProperty('userEmail', testUserCorrect.email);
         expect(res.body.user).toHaveProperty('name', testUserCorrect.name);
         expect(res.body).toHaveProperty('token');
+    });
+
+    it('Should try login with a nonexistent account and give an unauthorized error', async () => {
+        const res = await request(app).post('/login').send({
+            email: testUserWrong.email,
+            password: testUserWrong.password
+        });
+        expect(res.status).toBe(403);
     });
 
 })

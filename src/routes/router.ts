@@ -20,7 +20,7 @@ router.get('/user/:id', getUser);
 router.put('/user', validator(updateUserSchema), updateUser);
 router.post('/profilePhotos', upload.single('avatar'), fileValidator, uploadProfilePhotos);
 router.delete('/profilePhotos', deleteProfilePhoto);
-router.delete('/user/:id', deleteUser);
+router.delete('/user', deleteUser);
 
 router.get('/category', getCategory);
 router.post('/category', validator(createCategorySchema), createCategory);
