@@ -10,7 +10,9 @@ import { login } from "../controllers/login";
 import { authentication, authenticationADM } from "../middlewares/Auth";
 
 const router = Router();
-
+router.post('/verifytoken',authentication,(req, res)=>{
+    res.status(200).send()
+})
 router.post('/user', validator(createUserSchema), createUser);
 router.post('/login', validator(loginSchema), login);
 
@@ -18,8 +20,8 @@ router.use(authentication);
 router.get('/user', getUsers);
 router.get('/user/:id', getUser);
 router.put('/user', validator(updateUserSchema), updateUser);
-router.post('/profilePhotos', upload.single('avatar'), fileValidator, uploadProfilePhotos);
-router.delete('/profilePhotos', deleteProfilePhoto);
+router.post('/profilephotos', upload.single('avatar'), fileValidator, uploadProfilePhotos);
+router.delete('/profilephotos', deleteProfilePhoto);
 router.delete('/user', deleteUser);
 
 router.get('/category', getCategory);
