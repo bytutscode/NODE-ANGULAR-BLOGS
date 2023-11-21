@@ -1,5 +1,6 @@
 import sequelize from "../connections/sequelize";
 import { Model, DataTypes } from "sequelize";
+import Post from "./Post";
 
 export interface View extends Model {
     user_ip: string,
@@ -15,5 +16,5 @@ export const View = sequelize.define<View>('View', {
         timestamps: false
     }
 )
-
+View.belongsTo(Post, { foreignKey: 'post_id' });
 export default View;

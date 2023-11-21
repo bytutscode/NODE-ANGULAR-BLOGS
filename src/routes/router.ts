@@ -3,7 +3,7 @@ import validator from "../middlewares/validation/validator";
 import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser } from '../controllers/user';
 import { createCategory, getCategory, updateCategory, deleteCategory } from "../controllers/category";
 import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema, createAdmSchema, createPostSchema } from "../middlewares/validation";
-import { createPost, getPosts, getPost, deletePost } from '../controllers/post';
+import { createPost, getPosts, getPost, deletePost, getPostsMainPage } from '../controllers/post';
 import { createAdm, deletePostAdm, getPostToApprove, managePost } from "../controllers/adm";
 import { fileValidator, upload } from "../middlewares/multer";
 import { login } from "../controllers/login";
@@ -30,6 +30,7 @@ router.put('/category/:id', validator(createCategorySchema), updateCategory);
 router.delete('/category/:id', deleteCategory);
 
 router.get('/post', getPosts);
+router.get('/post/home', getPostsMainPage);
 router.get('/post/:id', getPost);
 router.post('/post', upload.single('image'), validator(createPostSchema), fileValidator, createPost);
 router.delete('/post/:id', deletePost);

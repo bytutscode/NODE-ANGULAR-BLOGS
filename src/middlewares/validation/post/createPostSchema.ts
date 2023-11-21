@@ -1,7 +1,7 @@
 import joi from 'joi';
 
 export const createPostSchema = joi.object({
-    category_id: joi.number().required().messages({
+    category_id: joi.required().messages({
         'number.required': 'The category id is required',
         'number': 'The category id must be a number'
     }),

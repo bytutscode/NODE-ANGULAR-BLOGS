@@ -18,5 +18,13 @@ export const fileValidator = async (req: Request, res: Response, next: NextFunct
             message: 'The file is larger than 10MB(max size allowed)'
         })
     }
+
+    const allowedTypes = ['image/png','image/jpeg','image/jpg'];
+    if(!allowedTypes.includes(file.mimetype)){
+        return res.status(400).json({
+            message: 'The file must be an image'
+        }) 
+    }
+
     next()
 }

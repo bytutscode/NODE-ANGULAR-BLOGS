@@ -1,5 +1,6 @@
 import sequelize from "../connections/sequelize";
 import { Model, DataTypes } from "sequelize";
+import User from "./User";
 
 export interface Post extends Model {
     id: number,
@@ -27,5 +28,5 @@ export const Post = sequelize.define<Post>('Post', {
         timestamps: false
     }
 )
-
+Post.belongsTo(User, { foreignKey: 'user_id' });
 export default Post;
