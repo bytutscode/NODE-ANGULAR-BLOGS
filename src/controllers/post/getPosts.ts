@@ -5,9 +5,20 @@ import View from "../../models/View";
 import { Sequelize } from "sequelize";
 
 export const getPosts = async (req: Request, res: Response) => {
+    let {category, userID} = req.query;
+
+    let [pag, limit, offset]:any = [req.query.pag, req.query.limit,0];
+    isNaN(Number(pag))? pag = 1: pag = pag;
+    isNaN(Number(limit))? limit =10: limit;
+    offset = +pag <= 1? offset : limit * (pag - 1);
+    
+    const condition: any = {};
+    !(isNaN(Number(category)))? condition.category_id = Number(category):false;
+    !(isNaN(Number(userID)))? condition.user_id = Number(userID): false;
+
     try {
-        const posts = await Post.findAll({ where: { user_id: req.user.id }, order: [['id', 'DESC']] });
-        return res.status(200).json(posts);
+        const {rows:posts, count} = await Post.findAndCountAll({ where: condition, order: [['id', 'DESC']],offset, limit });
+        return res.status(200).json({posts, count});
     } catch (error) {
         return res.status(500).json({
             message: 'There was an internal error while processing your request'

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import validator from "../middlewares/validation/validator";
-import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser } from '../controllers/user';
+import { createUser, getUser, getUsers, updateUser, deleteProfilePhoto, uploadProfilePhotos, deleteUser,search } from '../controllers/user';
 import { createCategory, getCategory, updateCategory, deleteCategory } from "../controllers/category";
 import { createUserSchema, updateUserSchema, loginSchema, createCategorySchema, createAdmSchema, createPostSchema } from "../middlewares/validation";
 import { createPost, getPosts, getPost, deletePost, getPostsMainPage } from '../controllers/post';
@@ -15,6 +15,8 @@ router.post('/verifytoken',authentication,(req, res)=>{
 })
 router.post('/user', validator(createUserSchema), createUser);
 router.post('/login', validator(loginSchema), login);
+
+router.get('/search',search);
 
 router.use(authentication);
 router.get('/user', getUsers);
