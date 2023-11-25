@@ -16,13 +16,13 @@ export const search = async (req: Request, res: Response) => {
         let total: number;
 
         if (type == 'users') {
-            const { rows, count } = await User.findAndCountAll({ where: { name: { [Op.iLike]: `%${input}%` } }, offset, limit });
+            const { rows, count } = await User.findAndCountAll({ where: { name: { [Op.iLike]: `%${input}%` } }, offset, limit,order:[['id','ASC']] });
             results = rows; total = count;
         } else {
-            const { rows, count } = await Post.findAndCountAll({ where: { title: { [Op.iLike]: `%${input}%` } }, offset, limit });
+            const { rows, count } = await Post.findAndCountAll({ where: { title: { [Op.iLike]: `%${input}%` } }, offset, limit ,order:[['id','DESC']]});
             results = rows; total = count;
         }
-
+        
         return res.status(200).json({ total, results });
     } catch (error) {
         return res.status(500).json({
