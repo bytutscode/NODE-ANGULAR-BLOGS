@@ -26,6 +26,7 @@ export const getPost = async (req: Request, res: Response) => {
 
         return res.status(200).json(post);
     } catch (error) {
+
         return res.status(500).json({
             message: 'There was an internal error while processing your request'
         })

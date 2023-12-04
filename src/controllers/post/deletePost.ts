@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Post from "../../models/Post";
+import View from "../../models/View";
 
 export const deletePost = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -11,6 +12,8 @@ export const deletePost = async (req: Request, res: Response) => {
     }
 
     try {
+
+        await View.destroy({ where: { post_id: id } });
         const post = await Post.findOne({ where: { id, user_id: req.user.id } });
         if (!post) {
             return res.status(404).json({

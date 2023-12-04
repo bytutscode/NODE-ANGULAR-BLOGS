@@ -14,5 +14,6 @@ if (process.env.NODE_ENV === 'test') {
         db.password = process.env.DB_TEST_PASSWORD as string,
         db.port = process.env.DB_TEST_PORT as string
 }
+console.log(db);
 
 export = db;

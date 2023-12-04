@@ -37,12 +37,15 @@ export const createPost = async (req: Request, res: Response) => {
         await post.save();
         return res.status(201).json(post)
     } catch (error) {
+        console.log('This is the first  !!!!!!!!!!' + error);
+
         try {
             imageUploaded ? await deleteImage(imageKey) : null;
             return res.status(500).json({
                 message: 'There was an internal error while processing your request'
             })
         } catch (error) {
+            console.log('This is the second  !!!!!!!!!!' + error);
             return res.status(500).json({
                 message: 'There was an internal error while processing your request'
             })
