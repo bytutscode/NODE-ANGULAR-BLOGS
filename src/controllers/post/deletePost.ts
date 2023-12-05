@@ -13,7 +13,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
     try {
 
-        await View.destroy({ where: { post_id: id } });
+
         const post = await Post.findOne({ where: { id, user_id: req.user.id } });
         if (!post) {
             return res.status(404).json({
@@ -21,6 +21,7 @@ export const deletePost = async (req: Request, res: Response) => {
             })
         }
 
+        await View.destroy({ where: { post_id: id } });
         await post.destroy();
         return res.status(204).send();
     } catch (error) {
