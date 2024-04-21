@@ -21,6 +21,8 @@ export const getPost = async (req: Request, res: Response) => {
 
         const checkView = await View.findOne({ where: { user_ip: req.ip, post_id: id } });
         if (!checkView) {
+            console.log(req.ip);
+            console.log(req);
             await View.create({ user_ip: req.ip, post_id: id });
         }
 
