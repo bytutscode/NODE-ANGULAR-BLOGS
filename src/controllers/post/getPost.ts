@@ -4,7 +4,7 @@ import View from "../../models/View";
 
 export const getPost = async (req: Request, res: Response) => {
     const { id } = req.params;
-
+   
     if (isNaN(+id)) {
         return res.status(404).json({
             message: 'Post not found'

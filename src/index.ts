@@ -8,6 +8,7 @@ const app = Express();
 app.use(cors());
 app.use(Express.json());
 app.use(Express.static(__dirname + '../public'));
+app.set('trust proxy',true); 
 app.use(router);
 
 const port = process.env.PORT
