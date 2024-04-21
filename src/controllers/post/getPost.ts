@@ -18,11 +18,11 @@ export const getPost = async (req: Request, res: Response) => {
                 message: 'Post not found'
             })
         }
-
+        console.log(req.headers['x-forwarded-for'] ||
+        req.socket.remoteAddress ||
+        null)
         const checkView = await View.findOne({ where: { user_ip: req.ip, post_id: id } });
         if (!checkView) {
-            console.log(req.ip);
-            console.log(req);
             await View.create({ user_ip: req.ip, post_id: id });
         }
 
