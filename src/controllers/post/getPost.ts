@@ -4,7 +4,7 @@ import View from "../../models/View";
 
 export const getPost = async (req: Request, res: Response) => {
     const { id } = req.params;
-   
+    
     if (isNaN(+id)) {
         return res.status(404).json({
             message: 'Post not found'
@@ -18,6 +18,8 @@ export const getPost = async (req: Request, res: Response) => {
                 message: 'Post not found'
             })
         }
+        console.log("INSIDE GET POST");
+
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
         const checkView = await View.findOne({ where: { user_ip: ip, post_id: id } });
         if (!checkView) {
