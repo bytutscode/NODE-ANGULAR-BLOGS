@@ -10,7 +10,8 @@ export const getPost = async (req: Request, res: Response) => {
             message: 'Post not found'
         })
     }
-
+    console.log('houve algum erro');
+    return res.status(500).json({error:true});
     try {
         const post = await Post.findByPk(id);
         if (!post) {
