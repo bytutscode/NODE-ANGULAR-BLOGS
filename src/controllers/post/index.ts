@@ -1,5 +1,5 @@
 import { createPost } from './createPost';
-import { getPosts,getPostsMainPage } from './/getPosts';
+import { getPosts,getPostsMainPage } from './getPosts';
 import { getPost } from './getPost';
 import { deletePost } from './deletePost';
 
