@@ -34,7 +34,7 @@ router.delete('/category/:id', authenticationADM, deleteCategory);
 
 router.get('/post', getPosts);
 router.get('/post/home', getPostsMainPage);
-// router.get('/post/:id', getPost);
+router.get('/post/:id', getPost);
 router.post('/post', authentication, upload.single('image'), validator(createPostSchema), fileValidator, createPost);
 router.delete('/post/:id', authentication, deletePost);
 
