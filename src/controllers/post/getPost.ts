@@ -19,7 +19,7 @@ export const getPost = async (req: Request, res: Response) => {
             })
         }
         console.log("INSIDE GET POST");
-
+        return res.status(500).json({error:true});
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
         const checkView = await View.findOne({ where: { user_ip: ip, post_id: id } });
         if (!checkView) {
