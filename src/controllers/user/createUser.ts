@@ -15,7 +15,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
 
         const newUser = User.build();
         newUser.name = name;
-        newUser.email = email;
+        newUser.email = email.trim().toLowerCase();
         newUser.password = await generateHashedPassword(password);
         await newUser.save();
 
